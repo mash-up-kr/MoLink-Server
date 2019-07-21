@@ -22,13 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LinkController {
   private LinkService linkService;
   private UserService userService;
-  private LinkRepository linkRepository;
 
-  public LinkController(LinkService linkService, UserService userService,
-      LinkRepository linkRepository) {
+  public LinkController(LinkService linkService, UserService userService) {
     this.linkService = linkService;
     this.userService = userService;
-    this.linkRepository = linkRepository;
   }
 
   /* 링크 생성 */
