@@ -8,5 +8,5 @@ import lombok.ToString;
 public class ReqCreateFolder {
   String name;
   String color;
-  Long parentId;
+  Long parent_id;
 }
