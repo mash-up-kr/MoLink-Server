@@ -28,7 +28,7 @@ public class LinkService {
 
   @Transactional
   public ResCreateLink createLink(User user, ReqCreateLink requestBody){
-    Folder parentFolder = folderRepository.findById(requestBody.getParent_id())
+    Folder parentFolder = folderRepository.findById(requestBody.getFolderId())
         .orElseThrow(() -> new NotFoundException("저장할 폴더가 존재하지 않습니다."));
 
     if(!(parentFolder.getUser().getId().equals(user.getId())))
@@ -47,13 +47,14 @@ public class LinkService {
     resCreateLink.setId(createdLink.getId());
     resCreateLink.setName(createdLink.getName());
     resCreateLink.setUrl(createdLink.getUrl());
+    resCreateLink.setFolderId(parentFolder.getId());
 
     return  resCreateLink;
   }
 
   @Transactional
   public ResUpdateLink updateLink(User user, Long id, ReqUpdateLink requestBody){
-    Folder parentFolder = folderRepository.findById(requestBody.getParentId())
+    Folder parentFolder = folderRepository.findById(requestBody.getFolderId())
         .orElseThrow(() -> new NotFoundException("저장할 폴더가 존재하지 않습니다."));
 
     Link link = linkRepository.findById(id).orElseThrow(() -> new NotFoundException("Link not Found"));
@@ -67,7 +68,7 @@ public class LinkService {
 
     ResUpdateLink resUpdateLink = new ResUpdateLink();
     resUpdateLink.setName(updatedLink.getName());
-    resUpdateLink.setParentId(updatedLink.getFolder().getId());
+    resUpdateLink.setFolderId(updatedLink.getFolder().getId());
 
     return  resUpdateLink;
   }

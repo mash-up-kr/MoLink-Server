@@ -7,5 +7,5 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class ReqUpdateLink {
   String name;
-  Long parentId;
+  Long folderId;
 }

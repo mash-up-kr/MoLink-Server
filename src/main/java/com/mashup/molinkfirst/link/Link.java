@@ -41,7 +41,7 @@ public class Link extends BaseTimeEntity {
 
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name = "parentId")
+  @JoinColumn(name = "folderId")
   private Folder folder;
 
   @ManyToOne
