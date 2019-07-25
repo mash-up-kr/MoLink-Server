@@ -8,5 +8,5 @@ import lombok.ToString;
 public class ReqCreateLink {
   String url;
   String name;
-  Long parent_id;
+  Long folderId;
 }

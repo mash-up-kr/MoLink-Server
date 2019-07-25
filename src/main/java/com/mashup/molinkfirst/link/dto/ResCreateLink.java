@@ -11,4 +11,5 @@ public class ResCreateLink {
   Long id;
   String url;
   String name;
+  Long folderId;
 }

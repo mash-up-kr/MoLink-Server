@@ -63,6 +63,7 @@ public class FolderService {
   public ResCreateFolder createFolder(User user, ReqCreateFolder requestBody){
     Optional<Folder> parentFolder = folderRepository.findById(requestBody.getParentId());
     Folder createdFolder;
+    ResCreateFolder resCreateFolder = new ResCreateFolder();
 
     if (parentFolder.isPresent() ) {
       Folder folder = Folder.builder()
@@ -73,6 +74,8 @@ public class FolderService {
           .build();
 
       createdFolder = folderRepository.save(folder);
+      resCreateFolder.setParentId(parentFolder.get().getId());
+
     } else {
       Folder folder = Folder.builder()
           .name(requestBody.getName())
@@ -81,9 +84,9 @@ public class FolderService {
           .user(user)
           .build();
       createdFolder = folderRepository.save(folder);
+      resCreateFolder.setParentId(null);
     }
 
-    ResCreateFolder resCreateFolder = new ResCreateFolder();
     resCreateFolder.setId(createdFolder.getId());
     resCreateFolder.setName(createdFolder.getName());
     resCreateFolder.setColor(createdFolder.getColor());
