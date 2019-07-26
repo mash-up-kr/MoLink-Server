@@ -15,6 +15,7 @@ import com.mashup.molinkfirst.user.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,11 +34,32 @@ public class FolderService {
 
   @Transactional
   List<ResCategoryFolder> postCategoriesFolders(User user, ReqCategoryFolder requestBody) {
+    String[] folderColors = {
+        "#39add1", // light blue
+        "#3079ab", // dark blue
+        "#c25975", // mauve
+        "#e15258", // red
+        "#f9845b", // orange
+        "#838cc7", // lavender
+        "#7d669e", // purple
+        "#53bbb4", // aqua
+        "#51b46d", // green
+        "#e0ab18", // mustard
+        "#637a91", // dark gray
+        "#f092b0", // pink
+        "#b7c0c7"  // light gray
+    };
+    Random randomGenerator = new Random();
+
     int length = requestBody.getCategory_name().size();
     for (int i = 0; i < length; i++){
+
+      int randomNumber = randomGenerator.nextInt(folderColors.length);
+      String color = folderColors[randomNumber];
+
       Folder folder = Folder.builder()
           .name(requestBody.getCategory_name().get(i))
-          .color("#000000")
+          .color(color)
           .parent(null)
           .user(user)
           .build();
